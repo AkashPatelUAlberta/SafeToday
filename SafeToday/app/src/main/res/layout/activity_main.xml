@@ -44,7 +44,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/engineBtn"
-        android:background="#ffffff" />
+        android:background="#ffffff"
+        style="?android:attr/borderlessButtonStyle" />
 
     <TextView
         android:text="Fuel Level:"
@@ -55,5 +56,13 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
         android:id="@+id/fuelLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/engineBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/engineTest" />
 
 </RelativeLayout>
