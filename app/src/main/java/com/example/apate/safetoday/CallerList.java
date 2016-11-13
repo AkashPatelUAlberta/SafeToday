@@ -11,6 +11,7 @@ import com.android.internal.telephony.ITelephony;
 
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -20,11 +21,7 @@ import java.util.Map;
 
 public class CallerList extends BroadcastReceiver {
     // Two mapping fields for the database table
-
-    // To easily create Blacklist object, an alternative constructor
-    public CallerList(String phone, Map<Date, String> map) {
-        map.put(new Date(), phone);
-    }
+    MainActivity x = new MainActivity();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -38,6 +35,11 @@ public class CallerList extends BroadcastReceiver {
             String phoneNumber = bundle.getString("incoming_number");
             Log.d("INCOMING", phoneNumber);
             if ((phoneNumber != null)) {
+                Map<Date, String> map = x.getMap();
+                map.put(new Date(), phoneNumber);
+                x.putMap(map);
+
+                //need to check all the times and numbers now....
                 telephonyService.endCall();
                 Log.d("HANG UP", phoneNumber);
             }
