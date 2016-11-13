@@ -4,7 +4,7 @@ P0003	      Fuel Volume Regulator Control Circuit Low
 P0004	      Fuel Volume Regulator Control Circuit High
 P0005	      Fuel Shutoff Valve Control Circuit/Open
 P0006	      Fuel Shutoff Valve Control Circuit Low
-P0007	      Fuel Shutoff Valve Control Circuit H igh
+P0007	      Fuel Shutoff Valve Control Circuit High
 P0008	      Engine Position System Performance (Bank1)
 P0009	      Engine Position System Performance (Bank2)
 P0010	      A Camshaft Position Actuator Circuit (Bank1)
