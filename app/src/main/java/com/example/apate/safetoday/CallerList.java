@@ -1,6 +1,5 @@
 package com.example.apate.safetoday;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,13 +7,11 @@ import java.util.Map;
  */
 
 public class CallerList {
-    Map<Date, String> map = new HashMap<Date, String>();
     // Two mapping fields for the database table
 
     // To easily create Blacklist object, an alternative constructor
-    public CallerList(String phone) {
+    public CallerList(String phone, Map<Date, String> map) {
         map.put(new Date(), phone);
     }
-
 
 }
