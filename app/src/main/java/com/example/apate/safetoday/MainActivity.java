@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnEngine;
     TextView lblEngine;
     TextView lblFuel;
+
+//    Bluetooth blue = new Bluetooth();
     // map that knows how many times people have called
     private Map<String, ArrayList<Date>> map = new HashMap<String, ArrayList<Date>>();
 

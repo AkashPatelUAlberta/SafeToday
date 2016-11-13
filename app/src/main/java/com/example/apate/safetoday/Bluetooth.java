@@ -57,7 +57,10 @@ public class Bluetooth extends Activity {
 
     }
 
-    private void setup() {
+    Bluetooth(){
+        this.setup();
+    }
+    public void setup() {
         ArrayList deviceStrs = new ArrayList();
         final ArrayList devices = new ArrayList();
 
