@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 //    new TimeoutObdCommand().run(socket.getInputStream(), socket.getOutputStream());
 //    new SelectProtocolObdCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
 
+    //Nathan fixed our project.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
