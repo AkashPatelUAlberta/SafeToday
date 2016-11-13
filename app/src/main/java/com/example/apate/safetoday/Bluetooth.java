@@ -42,6 +42,8 @@ public class Bluetooth extends Activity {
     private String OBDII_Adapter;
     private TextView rpm_textView;
     private TextView speed_textView;
+    private TextView code_number_textView;
+    private TextView code_info_textView;
 
     Context context;
 
@@ -51,6 +53,8 @@ public class Bluetooth extends Activity {
         setContentView(R.layout.bluetooth_activity);
         rpm_textView = (TextView) findViewById(R.id.rpm);
         speed_textView = (TextView) findViewById(R.id.speed);
+        code_number_textView = (TextView) findViewById(R.id.codenumberlbl);
+        code_info_textView = (TextView)findViewById(R.id.codeinfolbl);
 
         this.context = this;
         setup();
