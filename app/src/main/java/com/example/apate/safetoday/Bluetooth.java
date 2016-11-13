@@ -14,6 +14,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 //import com.github.pires.obd.enums.ObdProtocols;
 
 import com.github.pires.obd.commands.SpeedCommand;
@@ -27,6 +39,7 @@ import com.github.pires.obd.exceptions.UnableToConnectException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -34,6 +47,11 @@ import static android.app.PendingIntent.getActivity;
 import static android.content.ContentValues.TAG;
 import static java.lang.Thread.sleep;
 
+
+
+
+import java.util.Map;
+import com.github.pires.obd.commands.control.TroubleCodesCommand;
 /**
  * Created by Randi Lynn on 2016-11-12.
  */
@@ -44,7 +62,7 @@ public class Bluetooth extends Activity {
     private TextView speed_textView;
     private TextView code_number_textView;
     private TextView code_info_textView;
-
+    Map<String, String> map = new HashMap<String, String>();
     Context context;
 
     @Override
@@ -55,8 +73,8 @@ public class Bluetooth extends Activity {
         speed_textView = (TextView) findViewById(R.id.speed);
         code_number_textView = (TextView) findViewById(R.id.codenumberlbl);
         code_info_textView = (TextView)findViewById(R.id.codeinfolbl);
-
         this.context = this;
+        mapSetup();
         setup();
 
     }
@@ -77,6 +95,8 @@ public class Bluetooth extends Activity {
                 devices.add(device.getAddress());
             }
         }
+
+
 
         // show list
         Spinner btView = new Spinner(this.context);
@@ -104,6 +124,7 @@ public class Bluetooth extends Activity {
         alertDialog.setTitle("Choose Bluetooth device");
         alertDialog.show();
      */
+
         OBD_Connect();
     }
 
@@ -134,6 +155,7 @@ public class Bluetooth extends Activity {
 
         final RPMCommand engineRpmCommand = new RPMCommand();
         final SpeedCommand speedCommand = new SpeedCommand();
+        final TroubleCodesCommand codeCommand = new TroubleCodesCommand();
 
         Runnable pollBluetoothData = new Runnable() {
             @Override
@@ -143,6 +165,7 @@ public class Bluetooth extends Activity {
                     try {
                         engineRpmCommand.run(finalSocket.getInputStream(), finalSocket.getOutputStream());
                         speedCommand.run(finalSocket.getInputStream(), finalSocket.getOutputStream());
+                        codeCommand.run(finalSocket.getInputStream(), finalSocket.getOutputStream());
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -153,12 +176,15 @@ public class Bluetooth extends Activity {
 
                     Log.d(TAG, "RPM: " + engineRpmCommand.getFormattedResult());
                     Log.d(TAG, "Speed: " + speedCommand.getFormattedResult());
+                    Log.d(TAG, "Engine Code: " + codeCommand.getFormattedResult());
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             rpm_textView.setText(engineRpmCommand.getCalculatedResult());
                             speed_textView.setText(speedCommand.getFormattedResult());
+                            code_number_textView.setText(codeCommand.getFormattedResult());
+                            code_info_textView.setText(readCode(codeCommand.getFormattedResult(), map));
                         }
                     });
 
@@ -172,6 +198,27 @@ public class Bluetooth extends Activity {
 
     }
 
+    public String readCode(String number, Map<String, String> codes) {
+        if(number.length() == 0) {
+            return "No Error";
+        }
+        return codes.get(number);
+    }
 
+
+    public void mapSetup() {
+        String[] a;
+
+        try {
+            InputStream iS = getResources().getAssets().open("enginecodes.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(iS));
+            for(String line; (line = br.readLine()) != null; ) {
+                a = line.split("=");
+                map.put(a[0], a[1]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
