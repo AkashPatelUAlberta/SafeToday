@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.android.internal.telephony.ITelephony;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +23,12 @@ import java.util.Map;
 
 public class CallerList extends BroadcastReceiver {
     // Two mapping fields for the database table
-    MainActivity x = new MainActivity();
+    private MainActivity x = new MainActivity();
+
+    private boolean multipleCaller(ArrayList<Date> time_stamps) {
+
+        return true;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -35,14 +42,18 @@ public class CallerList extends BroadcastReceiver {
             String phoneNumber = bundle.getString("incoming_number");
             Log.d("INCOMING", phoneNumber);
             if ((phoneNumber != null)) {
-                Map<Date, String> map = x.getMap();
-                map.put(new Date(), phoneNumber);
+                Map<String, ArrayList<Date>> map = x.getMap();
+                ArrayList<Date> time_stamps = map.get(phoneNumber);
+                time_stamps.add(new Date());
+                map.put(phoneNumber, time_stamps);
                 x.putMap(map);
 
                 //need to check all the times and numbers now....
-
-                telephonyService.endCall();
-                Log.d("HANG UP", phoneNumber);
+                // True = hang up!
+                if (time_stamps.size() < 3 || multipleCaller(time_stamps)) {
+                    telephonyService.endCall();
+                    Log.d("HANG UP", phoneNumber);
+                }
             }
 
         } catch (Exception e) {
