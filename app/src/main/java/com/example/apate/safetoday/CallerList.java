@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Calendar;
 
 /**
  * Created by biancaangotti on 2016-11-12.
@@ -26,7 +26,10 @@ public class CallerList extends BroadcastReceiver {
     private MainActivity x = new MainActivity();
 
     private boolean multipleCaller(ArrayList<Date> time_stamps) {
-
+        Date last = time_stamps.get(time_stamps.size()-1);
+        long t = last.getTime();
+        Date afterRemovingThirtyMins = new Date(t - (30 * 60 * 1000));
+        if (time_stamps.get(time_stamps.size()-4).after(afterRemovingThirtyMins)) return false;
         return true;
     }
 
