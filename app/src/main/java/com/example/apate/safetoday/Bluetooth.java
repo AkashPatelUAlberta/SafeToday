@@ -31,7 +31,10 @@ import static android.content.ContentValues.TAG;
 public class Bluetooth extends Activity {
     private String OBDII_Adapter;
 
-    private void setup() {
+    Bluetooth(){
+        this.setup();
+    }
+    public void setup() {
         ArrayList deviceStrs = new ArrayList();
         final ArrayList devices = new ArrayList();
 
