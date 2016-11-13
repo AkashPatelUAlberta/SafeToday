@@ -8,6 +8,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     Button btnEngine;
     TextView lblEngine;
+    TextView lblFuel;
 
 //    new EchoOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
 //    new LineFeedOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnEngine = (Button)findViewById(R.id.engineBtn);
 
         lblEngine = (TextView)findViewById(R.id.engineTest);
+        lblFuel = (TextView)findViewById(R.id.fuelLabel);
 
         btnEngine.setOnClickListener(new View.OnClickListener() {
             @Override
