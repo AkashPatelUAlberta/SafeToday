@@ -40,6 +40,7 @@ public class CallerList extends BroadcastReceiver {
                 x.putMap(map);
 
                 //need to check all the times and numbers now....
+
                 telephonyService.endCall();
                 Log.d("HANG UP", phoneNumber);
             }

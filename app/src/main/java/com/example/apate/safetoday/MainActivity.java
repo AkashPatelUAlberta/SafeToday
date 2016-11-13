@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnEngine;
     TextView lblEngine;
     TextView lblFuel;
+    // map that knows how many times people have called
     private Map<Date, String> map = new HashMap<Date, String>();
 
 //    new EchoOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
