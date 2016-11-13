@@ -13,14 +13,21 @@ public class MainActivity extends AppCompatActivity {
     Button btnEngine;
     TextView lblEngine;
     TextView lblFuel;
-    Map<Date, String> map = new HashMap<Date, String>();
+    // map that knows how many times people have called
+    private Map<Date, String> map = new HashMap<Date, String>();
 
 //    new EchoOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
 //    new LineFeedOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
 //    new TimeoutObdCommand().run(socket.getInputStream(), socket.getOutputStream());
 //    new SelectProtocolObdCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
+    public Map<Date, String> getMap() {
+        return map;
+    }
 
-    //Nathan fixed our project.
+    public void putMap(Map<Date, String> m) {
+        map = m;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,5 +48,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void ins(Map<Date, String> map) {
+        this.map = map;
     }
 }
