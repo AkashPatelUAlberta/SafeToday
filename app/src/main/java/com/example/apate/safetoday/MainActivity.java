@@ -5,10 +5,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     Button btnEngine;
     TextView lblEngine;
     TextView lblFuel;
+    Map<Date, String> map = new HashMap<Date, String>();
 
 //    new EchoOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
 //    new LineFeedOffObdCommand().run(socket.getInputStream(), socket.getOutputStream());
