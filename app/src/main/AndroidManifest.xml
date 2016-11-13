@@ -19,8 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver  android:name=".CallerList">
-            <intent-filter  android:priority="100" >
-                <action android:name="android.intent.action.PHONE_STATE" />
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.PHONE_STATE"/>
             </intent-filter>
         </receiver>
         <activity android:name=".MainActivity">
