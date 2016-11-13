@@ -41,6 +41,7 @@ public class CallerList extends BroadcastReceiver {
             Bundle bundle = intent.getExtras();
             String phoneNumber = bundle.getString("incoming_number");
             Log.d("INCOMING", phoneNumber);
+
             if ((phoneNumber != null)) {
                 Map<String, ArrayList<Date>> map = x.getMap();
                 ArrayList<Date> time_stamps = map.get(phoneNumber);
