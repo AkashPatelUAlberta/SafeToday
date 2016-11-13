@@ -6,5 +6,8 @@ package com.example.apate.safetoday;
 
 public class Bluetooth {
 
+    public void main() {
+
+    }
 
 }
